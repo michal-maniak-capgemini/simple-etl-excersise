@@ -1,0 +1,17 @@
+[project]
+name = "simple-etl-excersise"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.12",
+    "flake8>=7.2.0",
+    "isort>=6.0.1",
+    "pytest>=8.3.5",
+    "requests>=2.32.3",
+    "reverse-geocode>=1.6.5",
+    "ruff>=0.11.4",
+    "sqlalchemy>=2.0.40",
+    "uvicorn>=0.34.1",
+]
