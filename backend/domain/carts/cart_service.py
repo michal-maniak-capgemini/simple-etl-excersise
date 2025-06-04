@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from backend.common.models.cart_dto import CartDto
 from backend.common.utils.file_util import FileUtil
 from backend.common.utils.logger import logger
-from backend.database.entities.cart import Cart
+from backend.domain.entities.cart import Cart
 from backend.interfaces.cart_service_interface import CartServiceInterface
 from backend.interfaces.product_from_cart_service_interface import (
     ProductFromCartServiceInterface,

@@ -6,7 +6,7 @@ from backend.common.models.cart_dto import CartDto
 from backend.common.models.product_from_cart_dto import ProductFromCartDto
 from backend.common.utils.file_util import FileUtil
 from backend.common.utils.logger import logger
-from backend.database.entities.product_from_cart import ProductFromCart
+from backend.domain.entities.product_from_cart import ProductFromCart
 from backend.interfaces.product_from_cart_service_interface import (
     ProductFromCartServiceInterface,
 )

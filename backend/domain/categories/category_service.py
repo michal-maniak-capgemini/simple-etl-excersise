@@ -7,9 +7,9 @@ from sqlalchemy.orm import Session
 from backend.common.models.most_ordered_category_dto import MostOrderedCategoryDto
 from backend.common.utils.file_util import FileUtil
 from backend.common.utils.logger import logger
-from backend.database.entities.cart import Cart
-from backend.database.entities.product import Product
-from backend.database.entities.product_from_cart import ProductFromCart
+from backend.domain.entities.cart import Cart
+from backend.domain.entities.product import Product
+from backend.domain.entities.product_from_cart import ProductFromCart
 from backend.interfaces.category_service_interface import (
     CategoryServiceInterface,
 )

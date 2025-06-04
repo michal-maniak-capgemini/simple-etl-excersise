@@ -6,7 +6,7 @@ from backend.common.models.user_dto import UserDto
 from backend.common.utils.coordinates_util import CoordinatesUtil
 from backend.common.utils.file_util import FileUtil
 from backend.common.utils.logger import logger
-from backend.database.entities.user import User
+from backend.domain.entities.user import User
 from backend.interfaces.user_service_interface import UserServiceInterface
 from backend.interfaces.dummy_json_api_interface import DummyJSONApiInterface
 

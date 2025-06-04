@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from backend.common.models.product_dto import ProductDto
 from backend.common.utils.file_util import FileUtil
 from backend.common.utils.logger import logger
-from backend.database.entities.product import Product
+from backend.domain.entities.product import Product
 from backend.interfaces.product_service_interface import ProductServiceInterface
 from backend.interfaces.dummy_json_api_interface import DummyJSONApiInterface
 
