@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class MostOrderedCategoryDto(BaseModel):
@@ -6,5 +6,6 @@ class MostOrderedCategoryDto(BaseModel):
     category_name: str
     total_orders: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(
+        from_attributes=True
+    )

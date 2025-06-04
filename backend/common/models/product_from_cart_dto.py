@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class ProductFromCartDto(BaseModel):
@@ -6,5 +6,6 @@ class ProductFromCartDto(BaseModel):
     product_id: int
     quantity: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(
+        from_attributes=True
+    )
