@@ -4,13 +4,13 @@ from starlette.responses import RedirectResponse
 
 from backend.controller.controller import router
 from backend.database.sqlite_database import Session, create_tables
-from backend.domain.carts.cart_service import CartService
-from backend.domain.categories.category_service import CategoryService
-from backend.domain.products.product_service import ProductService
-from backend.domain.products_from_carts.product_from_cart_service import (
+from backend.domain.services.cart_service import CartService
+from backend.domain.services.category_service import CategoryService
+from backend.domain.services.product_service import ProductService
+from backend.domain.services.product_from_cart_service import (
     ProductFromCartService,
 )
-from backend.domain.users.user_service import UserService
+from backend.domain.services.user_service import UserService
 from backend.dummy_json_api.dummy_json_api import DummyJSONApi
 
 

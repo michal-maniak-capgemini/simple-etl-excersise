@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock, patch, MagicMock
 
-from backend.domain.carts.cart_service import CartService
+from backend.domain.services.cart_service import CartService
 from backend.common.models.cart_dto import CartDto
 from backend.domain.entities.cart import Cart
 from backend.interfaces.dummy_json_api_interface import DummyJSONApiInterface
