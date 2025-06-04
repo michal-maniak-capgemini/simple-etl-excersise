@@ -25,6 +25,7 @@ class CategoryService(CategoryServiceInterface):
         self.__db_session: Session = db_session
 
     def get_most_ordered_category(self) -> List[MostOrderedCategoryDto]:
+        FileUtil.clean_txt_file_before_processing(self.__CATEGORIES_TXT)
         with self.__db_session:
             logger.info("Fetching most ordered categories from DB")
             results = (
