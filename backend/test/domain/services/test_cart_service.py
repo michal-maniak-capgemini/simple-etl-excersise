@@ -75,7 +75,7 @@ class TestGetAllCarts:
 
 
 class TestProcessCarts:
-    @patch("backend.domain.carts.cart_service.FileUtil")
+    @patch("backend.domain.services.cart_service.FileUtil")
     def test_process_new_cart(
         self,
         mock_file_util,
@@ -88,7 +88,6 @@ class TestProcessCarts:
         cart_json = {"id": 1, "userId": 101}
         mock_dummy_json_api.get_carts.return_value = [[cart_json]]
 
-        # Set up session to indicate cart doesn't exist
         mock_db_session.query.return_value.filter.return_value.count.return_value = 0
 
         # Act
@@ -106,7 +105,7 @@ class TestProcessCarts:
             cart_json, CartDto(cart_id=1, user_id=101)
         )
 
-    @patch("backend.domain.carts.cart_service.FileUtil")
+    @patch("backend.domain.services.cart_service.FileUtil")
     def test_process_existing_cart(
         self,
         mock_file_util,
@@ -133,7 +132,7 @@ class TestProcessCarts:
         mock_file_util.save_result_to_txt_file.assert_not_called()
         mock_product_from_cart_service.process_products_from_carts.assert_not_called()
 
-    @patch("backend.domain.carts.cart_service.FileUtil")
+    @patch("backend.domain.services.cart_service.FileUtil")
     def test_process_multiple_cart_batches(
         self,
         mock_file_util,
@@ -143,10 +142,10 @@ class TestProcessCarts:
         mock_product_from_cart_service,
     ):
         # Arrange
-        cart1 = {"id": 1, "userId": 101}
-        cart2 = {"id": 2, "userId": 102}
-        batch1 = [cart1]
-        batch2 = [cart2]
+        cart1_json = {"id": 1, "userId": 101}
+        cart2_json = {"id": 2, "userId": 102}
+        batch1 = [cart1_json]
+        batch2 = [cart2_json]
         mock_dummy_json_api.get_carts.return_value = [batch1, batch2]
 
         # First cart doesn't exist, second cart exists
@@ -167,7 +166,7 @@ class TestProcessCarts:
             mock_product_from_cart_service.process_products_from_carts.call_count == 1
         )
 
-    @patch("backend.domain.carts.cart_service.FileUtil")
+    @patch("backend.domain.services.cart_service.FileUtil")
     def test_process_empty_batch(
         self,
         mock_file_util,
