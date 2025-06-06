@@ -23,12 +23,12 @@ def mock_dummy_json_api():
     """Fixture for mocking the dummy JSON API interface"""
     return Mock(spec=DummyJSONApiInterface)
 
+
 @pytest.fixture
 def user_service(mock_db_session, mock_dummy_json_api):
     """Fixture for creating a UserService instance with mocked dependencies"""
-    return UserService(
-        mock_dummy_json_api, mock_db_session
-    )
+    return UserService(mock_dummy_json_api, mock_db_session)
+
 
 class TestGetAllUsers:
     def test_get_all_users_returns_converted_dtos(self, user_service, mock_db_session):
@@ -42,7 +42,7 @@ class TestGetAllUsers:
             street="123 Main St",
             city="Anytown",
             country="USA",
-            user_id=234
+            user_id=234,
         )
 
         user2 = User(
@@ -54,7 +54,7 @@ class TestGetAllUsers:
             street="My Normal St",
             city="Big City",
             country="Hungary",
-            user_id=12
+            user_id=12,
         )
 
         mock_db_session.query.return_value.all.return_value = [user1, user2]
@@ -98,10 +98,18 @@ class TestGetAllUsers:
         mock_db_session.query.assert_called_once_with(User)
         assert len(result) == 0
 
+
 class TestProcessUsers:
     @patch("backend.domain.services.user_service.FileUtil")
     @patch("backend.domain.services.user_service.CoordinatesUtil")
-    def test_process_new_user(self, mock_coordinates_util, mock_file_util, user_service, mock_dummy_json_api, mock_db_session):
+    def test_process_new_user(
+        self,
+        mock_coordinates_util,
+        mock_file_util,
+        user_service,
+        mock_dummy_json_api,
+        mock_db_session,
+    ):
         # Arrange
         user_json = {
             "id": 1,
@@ -113,11 +121,8 @@ class TestProcessUsers:
             "address": {
                 "address": "123 Main St",
                 "city": "Anytown",
-                "coordinates": {
-                    "lat": "40.7128",
-                    "lng": "-74.0060"
-                }
-            }
+                "coordinates": {"lat": "40.7128", "lng": "-74.0060"},
+            },
         }
         mock_dummy_json_api.get_users.return_value = [[user_json]]
         mock_coordinates_util.get_country_by_coordinates.return_value = "USA"
@@ -137,7 +142,7 @@ class TestProcessUsers:
             street="123 Main St",
             city="Anytown",
             country="USA",
-            user_id=1
+            user_id=1,
         )
 
         mock_db_session.query.assert_called_with(User)
@@ -154,7 +159,14 @@ class TestProcessUsers:
 
     @patch("backend.domain.services.user_service.FileUtil")
     @patch("backend.domain.services.user_service.CoordinatesUtil")
-    def test_process_existing_user(self, mock_coordinates_util, mock_file_util, user_service, mock_dummy_json_api, mock_db_session):
+    def test_process_existing_user(
+        self,
+        mock_coordinates_util,
+        mock_file_util,
+        user_service,
+        mock_dummy_json_api,
+        mock_db_session,
+    ):
         # Arrange
         user_json = {
             "id": 1,
@@ -166,11 +178,8 @@ class TestProcessUsers:
             "address": {
                 "address": "123 Main St",
                 "city": "Anytown",
-                "coordinates": {
-                    "lat": "40.7128",
-                    "lng": "-74.0060"
-                }
-            }
+                "coordinates": {"lat": "40.7128", "lng": "-74.0060"},
+            },
         }
         mock_dummy_json_api.get_users.return_value = [[user_json]]
         mock_coordinates_util.get_country_by_coordinates.return_value = "USA"
@@ -191,8 +200,14 @@ class TestProcessUsers:
 
     @patch("backend.domain.services.user_service.FileUtil")
     @patch("backend.domain.services.user_service.CoordinatesUtil")
-    def test_process_multiple_user_batches(self, mock_coordinates_util, mock_file_util, user_service, mock_dummy_json_api,
-                              mock_db_session):
+    def test_process_multiple_user_batches(
+        self,
+        mock_coordinates_util,
+        mock_file_util,
+        user_service,
+        mock_dummy_json_api,
+        mock_db_session,
+    ):
         # Arrange
         user1_json = {
             "id": 1,
@@ -204,11 +219,8 @@ class TestProcessUsers:
             "address": {
                 "address": "123 Main St",
                 "city": "Anytown",
-                "coordinates": {
-                    "lat": "40.7128",
-                    "lng": "-74.0060"
-                }
-            }
+                "coordinates": {"lat": "40.7128", "lng": "-74.0060"},
+            },
         }
         user2_json = {
             "id": 2,
@@ -220,11 +232,8 @@ class TestProcessUsers:
             "address": {
                 "address": "My Normal St",
                 "city": "Big City",
-                "coordinates": {
-                    "lat": "38.1123",
-                    "lng": "-5.0088"
-                }
-            }
+                "coordinates": {"lat": "38.1123", "lng": "-5.0088"},
+            },
         }
         batch1 = [user1_json]
         batch2 = [user2_json]
@@ -232,12 +241,12 @@ class TestProcessUsers:
         mock_dummy_json_api.get_users.return_value = [batch1, batch2]
         mock_coordinates_util.get_country_by_coordinates.side_effect = [
             "USA",
-            "Hungary"
+            "Hungary",
         ]
 
         mock_db_session.query.return_value.filter.return_value.count.side_effect = [
             0,
-            0
+            0,
         ]
 
         # Act
@@ -252,8 +261,14 @@ class TestProcessUsers:
 
     @patch("backend.domain.services.user_service.FileUtil")
     @patch("backend.domain.services.user_service.CoordinatesUtil")
-    def test_process_multiple_user_batches(self, mock_coordinates_util, mock_file_util, user_service, mock_dummy_json_api,
-                              mock_db_session):
+    def test_process_multiple_user_batches(
+        self,
+        mock_coordinates_util,
+        mock_file_util,
+        user_service,
+        mock_dummy_json_api,
+        mock_db_session,
+    ):
         # Arrange
         mock_dummy_json_api.get_users.return_value = [[]]
 

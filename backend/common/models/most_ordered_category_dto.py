@@ -6,6 +6,4 @@ class MostOrderedCategoryDto(BaseModel):
     category_name: str
     total_orders: int
 
-    model_config = ConfigDict(
-        from_attributes=True
-    )
+    model_config = ConfigDict(from_attributes=True)
